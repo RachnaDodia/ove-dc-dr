@@ -5,7 +5,5 @@
    - name: Failover vm to DR1
      debug:
        msg: "{{ K8S_AUTH_HOST }}"
-     delegate_to: localhost
    - name: Failover vm to DR
      command: "oc patch amr vmamr1 -n vmdr --type=merge -p '{'spec':{'desiredState':'Promoted'}}'"
-     delegate_to: localhost
