@@ -1,0 +1,14 @@
+---
+- name: Failover VM to DR
+  hosts: localhost
+  gather_facts: false
+  tasks:
+    - name: Promote amr vmamr1 to fail over the VM to DR
+      ansible.builtin.command: >
+        oc patch amr vmamr1 -n vmdr
+        --type=merge
+        -p '{"spec":{"desiredState":"Promoted"}}'
+        --server={{ lookup('env', 'K8S_AUTH_HOST') }}
+        --token={{ lookup('env', 'K8S_AUTH_API_KEY') }}
+        --insecure-skip-tls-verify=true
+      no_log: true
