@@ -1,0 +1,7 @@
+---
+- name: Failover vm to DR
+  hosts: all
+  tasks:
+   - name: Failover vm to DR
+     command: oc patch amr vmamr1 -n vmdr --type=merge -p '{"spec":{"desiredState":"Promoted"}}'
+     delegate_to: localhost
